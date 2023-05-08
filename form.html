@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Kintan Fahira_Tugas Jquery Ajax</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 2px solid #4c77af;
+        }
+
+        th {
+            background-color: #4c77af;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align:center">United States Universities List</h1>
+    <table id="universities">
+        <thead>
+            <tr>
+                <th>Universities Name</th>
+                <th>Country</th>
+                <th>Domains</th>
+                <th>Web Pages</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "http://universities.hipolabs.com/search?country=United+States",
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    $.each(data, function (i, universities) {
+                        var row = $("<tr>");
+                        $("<td>").text(universities.name).appendTo(row);
+                        $("<td>").text(universities.country).appendTo(row);
+                        $("<td>").text(universities.domains).appendTo(row);
+                        $("<td>").text(universities.web_pages).appendTo(row);
+                        $("#universities tbody").append(row);
+                    });
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>
